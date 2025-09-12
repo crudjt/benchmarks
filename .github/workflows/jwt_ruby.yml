@@ -1,0 +1,39 @@
+name: jwt-ruby benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+            target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            arch: aarch64
+            target: aarch64-apple-darwin
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.4
+          bundler-cache: true
+
+      - name: Install JWT
+        run: |
+          gem install jwt
+
+      - name: Install msgpack for check hash size
+        run: |
+          gem install msgpack
+
+      - name: Run benchmark
+        run: ruby jwt_tests/jwt_performance_test.rb
