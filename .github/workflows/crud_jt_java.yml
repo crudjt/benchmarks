@@ -38,5 +38,5 @@ jobs:
           ./gradlew publishToMavenLocal
 
       - name: Run tests in the test project
-        working-directory: ./crud_jt_tests/crud_jt_performance_test
+        working-directory: ./crud_jt_tests/crud_jt_performance_java_test
         run: ./gradlew run
