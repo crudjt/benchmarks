@@ -53,10 +53,8 @@ public class TestCRUD_JT {
         data.put("devices", new HashMap<String, Object>() {{
             put("ios_expired_at", Instant.now().toString());
             put("android_expired_at", Instant.now().toString());
-            put("mobile_app_expired_at", Instant.now().toString());
-            put("external_api_integration_expired_at", Instant.now().toString());
         }});
-        data.put("a", "a".repeat(100));
+        data.put("a", "a".repeat(200));
 
         while (pack(data).length > MAX_HASH_SIZE) {
             String a = (String) data.get("a");
