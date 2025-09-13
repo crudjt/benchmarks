@@ -1,0 +1,43 @@
+name: crud_jt-java benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            arch: aarch64
+          - os: ubuntu-latest
+            arch: x86_64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          cache: gradle
+
+      - name: Checkout crud_jt-java
+        uses: actions/checkout@v4
+        with:
+          repository: exwarvlad/crud_jt-java
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: crud_jt-java
+
+
+      - name: Install crud_jt-java
+        working-directory: ./crud_jt-java
+        run: |
+          ./gradlew publishToMavenLocal
+
+      - name: Run tests in the test project
+        working-directory: ./crud_jt_tests/crud_jt_performance_test
+        run: ./gradlew run
