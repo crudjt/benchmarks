@@ -36,6 +36,7 @@ jobs:
       - name: Install crud_jt-java
         working-directory: ./crud_jt-java
         run: |
+          ./gradlew wrapper --gradle-version 8.10.2
           ./gradlew publishToMavenLocal
 
       - name: Run tests in the test project
