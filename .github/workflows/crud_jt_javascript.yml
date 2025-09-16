@@ -1,0 +1,49 @@
+name: crud_jt-javascript benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+          - os: macos-latest
+            arch: aarch64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Checkout crud_jt-ruby
+        uses: actions/checkout@v4
+        with:
+          repository: exwarvlad/crud_jt-javascript
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: crud_jt-javascript
+
+      - name: Install dependencies
+        working-directory: ./crud_jt-javascript
+        run: |
+          npm install
+          npm run cargo-build -- --release
+
+      - name: Create package 'crud_jt'
+        working-directory: ./crud_jt-javascript
+        run: |
+          npm pack
+
+      - name: Run Node.js test
+        working-directory: ./crud_jt_tests/test-neon-package
+        run: |
+          npm install ../../crud_jt-javascript/crud_jt-0.1.0.tgz
+          npm install
+          node test.js

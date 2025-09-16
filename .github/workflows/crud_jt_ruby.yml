@@ -40,7 +40,6 @@ jobs:
 
       - name: Install crud_jt-ruby
         run: |
-          cd crud_jt-ruby
           bundle install
           bundle exec rake build
           gem install pkg/crud_jt-0.1.0.gem
