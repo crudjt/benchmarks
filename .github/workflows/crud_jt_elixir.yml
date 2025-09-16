@@ -1,0 +1,52 @@
+name: crud_jt-elixir benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+          - os: macos-latest
+            arch: aarch64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Elixir (Ubuntu/Windows)
+        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'windows-latest' }}
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.15'
+          otp-version: '26.0'
+
+      - name: Set up Elixir (macOS)
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          brew update
+          brew install elixir || brew upgrade elixir
+          mix local.hex --force
+          mix local.rebar --force
+
+      - name: Checkout crud_jt-elixir
+        uses: actions/checkout@v4
+        with:
+          repository: exwarvlad/crud_jt-elixir
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: crud_jt-elixir
+
+      - name: Install dependencies
+        working-directory: ./crud_jt-elixir
+        run: mix hex.build -o test_my_package --unpack
+
+      - name: Run tests
+        working-directory: ./crud_jt_tests/crud_jt_performance_elixir
+        run: |
+          mix deps.get
+          mix compile
+          mix test
