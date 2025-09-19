@@ -1,0 +1,41 @@
+name: crud_jt-php benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            arch: aarch64
+          - os: ubuntu-latest
+            arch: x86_64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, json, ffi, msgpack
+          tools: composer
+
+      - name: Checkout crud_jt-php
+        uses: actions/checkout@v4
+        with:
+          repository: exwarvlad/crud_jt-php
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          path: crud_jt-php
+
+      - name: Run Composer
+        working-directory: ./crud_jt-php
+        run: composer install
+
+      - name: Run test
+        run: php crud_jt_tests/crud_jt_performance_test.php
