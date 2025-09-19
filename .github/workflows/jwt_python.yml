@@ -1,0 +1,32 @@
+name: jwt-python benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            arch: aarch64
+            target: aarch64-apple-darwin
+          - os: ubuntu-latest
+            arch: x86_64
+            target: x86_64-unknown-linux-gnu
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.7'
+
+      - name: Install Dependencies
+        run: pip3 install PyJWT msgpack
+
+      - name: Run autotest
+        run: python3 jwt_tests/jwt_performance_test.py
