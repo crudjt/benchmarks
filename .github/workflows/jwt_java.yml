@@ -1,0 +1,30 @@
+name: jwt-java benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            arch: aarch64
+          - os: ubuntu-latest
+            arch: x86_64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          cache: gradle
+
+      - name: Run tests
+        working-directory: ./jwt_tests/jwt_performance_java_test
+        run: ./gradlew run
