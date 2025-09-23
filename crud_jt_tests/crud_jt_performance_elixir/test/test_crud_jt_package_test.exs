@@ -31,6 +31,7 @@ IO.puts("Elixir version: #{System.version()}")
 
 requests = 40_000
 count_to_run = 10
+max_hash_size = 256
 
 data = %{
   user_id: 414243,
@@ -39,8 +40,26 @@ data = %{
     ios_expired_at: DateTime.utc_now() |> DateTime.to_string(),
     android_expired_at: DateTime.utc_now() |> DateTime.to_string(),
   },
-  a: String.duplicate("a", 100)
+  a: String.duplicate("a", 1000)
 }
+
+# ---- Resize to max_hash_size ----
+shrink = fn shrink_fun, d ->
+  {:ok, packed} = Msgpax.pack(d, iodata: false)
+
+  cond do
+    byte_size(packed) <= max_hash_size -> d
+    d.a == "" -> d
+    true ->
+      new_a = String.slice(d.a, 0, String.length(d.a) - 1)
+      shrink_fun.(shrink_fun, %{d | a: new_a})
+  end
+end
+
+data = shrink.(shrink, data)
+{:ok, packed} = Msgpax.pack(data, iodata: false)
+
+IO.puts("Hash bytesize: #{byte_size(packed)}")
 
 updated_data = %{user_id: 42, role: 11}
 
