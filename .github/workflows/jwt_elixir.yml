@@ -1,0 +1,41 @@
+name: jwt-elixir benchmarks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x86_64
+          - os: macos-latest
+            arch: aarch64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Elixir (Ubuntu/Windows)
+        if: ${{ matrix.os == 'ubuntu-latest' || matrix.os == 'windows-latest' }}
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.17'
+          otp-version: '26.0'
+
+      - name: Set up Elixir (macOS)
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          brew update
+          brew install elixir || brew upgrade elixir
+          mix local.hex --force
+          mix local.rebar --force
+
+      - name: Run tests
+        working-directory: ./jwt_tests/jwt_performance_elixir_test
+        run: |
+          mix deps.get
+          mix compile
+          mix test
