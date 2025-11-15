@@ -41,7 +41,7 @@ jobs:
         run: |
           npm pack
 
-      - name: Run benchmarks
+      - name: Run Node.js test
         working-directory: ./crud_jt_tests/test-neon-package
         run: |
           npm install ../../crud_jt-javascript/crud_jt-0.1.0.tgz

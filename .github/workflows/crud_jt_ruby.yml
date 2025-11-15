@@ -31,18 +31,18 @@ jobs:
         run: |
           gem install bundler
 
-      - name: Checkout crud_jt-ruby
+      - name: Checkout crudjt-ruby
         uses: actions/checkout@v4
         with:
-          repository: exwarvlad/crud_jt-ruby
+          repository: exwarvlad/crudjt-ruby
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-ruby
+          path: crudjt-ruby
 
-      - name: Install crud_jt-ruby
+      - name: Install crudjt-ruby
         run: |
           bundle install
           bundle exec rake build
-          gem install pkg/crud_jt-0.1.0.gem
+          gem install pkg/crudjt-0.1.0.gem
 
       - name: Run benchmarks
         run: ruby crud_jt_tests/crud_jt_performance_test.rb
