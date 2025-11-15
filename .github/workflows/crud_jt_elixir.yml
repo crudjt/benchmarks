@@ -44,7 +44,7 @@ jobs:
         working-directory: ./crud_jt-elixir
         run: mix hex.build -o test_my_package --unpack
 
-      - name: Run tests
+      - name: Run benchmarks
         working-directory: ./crud_jt_tests/crud_jt_performance_elixir
         run: |
           mix deps.get

@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           path: crud_jt-go
 
-      - name: Run Go program
+      - name: Run benchmarks
         working-directory: ./crud_jt_tests/crud_jt_performance_go
         run: |
           go build

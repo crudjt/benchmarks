@@ -27,5 +27,5 @@ jobs:
         working-directory: ./jwt_tests/jwt_performance_javascript
         run: npm install
 
-      - name: Run test
+      - name: Run benchmarks
         run: node jwt_tests/jwt_performance_javascript/index.js

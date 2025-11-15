@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Elixir, Rebar3 and run tests (Linux)
+      - name: Run benchmarks
         if: runner.os == 'Linux'
         run: |
           curl -fsSO https://elixir-lang.org/install.sh
@@ -40,7 +40,7 @@ jobs:
           rebar3 escriptize
           _build/default/bin/my_lib
 
-      - name: Install Erlang, Rebar3 and run test (macOS)
+      - name: Run benchmarks
         if: runner.os == 'macOS'
         run: |
           brew install erlang rebar3 elixir

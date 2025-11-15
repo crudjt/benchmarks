@@ -44,5 +44,5 @@ jobs:
           bundle exec rake build
           gem install pkg/crud_jt-0.1.0.gem
 
-      - name: Run benchmark
+      - name: Run benchmarks
         run: ruby crud_jt_tests/crud_jt_performance_test.rb

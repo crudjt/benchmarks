@@ -33,7 +33,7 @@ jobs:
           mix local.hex --force
           mix local.rebar --force
 
-      - name: Run tests
+      - name: Run benchmarks
         working-directory: ./jwt_tests/jwt_performance_elixir_test
         run: |
           mix deps.get

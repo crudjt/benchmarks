@@ -38,6 +38,6 @@ jobs:
           python -m pip install --upgrade pip
           pip3 install .
 
-      - name: Run autotest
+      - name: Run benchmarks
         run: |
           python3 crud_jt_tests/crud_jt_performance_test.py

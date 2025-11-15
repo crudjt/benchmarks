@@ -48,5 +48,5 @@ jobs:
       - name: Install gems
         run: bundle install
 
-      - name: Run benchmark
+      - name: Run benchmarks
         run: bundle exec rails runner lib/redis_session_store_performance_test.rb

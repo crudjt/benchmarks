@@ -28,5 +28,5 @@ jobs:
       - name: Install Dependencies
         run: pip3 install PyJWT msgpack
 
-      - name: Run autotest
+      - name: Run benchmarks
         run: python3 jwt_tests/jwt_performance_test.py

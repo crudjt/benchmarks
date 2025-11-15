@@ -25,6 +25,6 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Run tests
+      - name: Run benchmarks
         working-directory: ./jwt_tests/jwt_performance_java_test
         run: ./gradlew run

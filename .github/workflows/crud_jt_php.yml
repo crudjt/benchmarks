@@ -37,5 +37,5 @@ jobs:
         working-directory: ./crud_jt-php
         run: composer install
 
-      - name: Run test
+      - name: Run benchmarks
         run: php crud_jt_tests/crud_jt_performance_test.php

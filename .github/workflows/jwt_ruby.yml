@@ -35,5 +35,5 @@ jobs:
         run: |
           gem install msgpack
 
-      - name: Run benchmark
+      - name: Run benchmarks
         run: ruby jwt_tests/jwt_performance_test.rb
