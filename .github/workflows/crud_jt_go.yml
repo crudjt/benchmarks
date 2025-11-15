@@ -1,4 +1,4 @@
-name: crud_jt-go benchmarks
+name: crudjt-go benchmarks
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: crud_jt-php benchmarks
+name: crudjt-php benchmarks
 
 on:
   workflow_dispatch:

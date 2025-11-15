@@ -1,4 +1,4 @@
-name: crud_jt-python benchmarks
+name: crudjt-python benchmarks
 
 on:
   workflow_dispatch:

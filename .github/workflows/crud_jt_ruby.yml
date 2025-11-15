@@ -1,4 +1,4 @@
-name: crud_jt-ruby benchmarks
+name: crudjt-ruby benchmarks
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: crud_jt-java benchmarks
+name: crudjt-java benchmarks
 
 on:
   workflow_dispatch:

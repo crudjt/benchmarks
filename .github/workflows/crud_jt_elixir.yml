@@ -1,4 +1,4 @@
-name: crud_jt-elixir benchmarks
+name: crudjt-elixir benchmarks
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: crud_jt-erlang benchmarks
+name: crudjt-erlang benchmarks
 
 on:
   workflow_dispatch:
