@@ -1,4 +1,4 @@
-require 'crud_jt'
+require 'crudjt'
 require 'benchmark'
 
 CRUD_JT::Config.encrypted_key('Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==')
@@ -26,7 +26,7 @@ p "CPU: #{cpu}"
 p "Ruby version: #{RUBY_VERSION}"
 
 data = {user_id: 414243, role: 11, devices: {ios_expired_at: Time.now.to_s, android_expired_at: Time.now.to_s, external_api_integration_expired_at: Time.now.to_s}, a: "a" * 100 }
-while MessagePack.pack(data).bytesize > Validation::MAX_HASH_SIZE
+while MessagePack.pack(data).bytesize > CRUD_JT::Validation::MAX_HASH_SIZE
   data[:a].chop!
 end
 
