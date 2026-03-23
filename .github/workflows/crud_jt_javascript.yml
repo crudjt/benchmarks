@@ -23,27 +23,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Checkout crud_jt-ruby
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-javascript
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-javascript
-
-      - name: Install dependencies
-        working-directory: ./crud_jt-javascript
-        run: |
-          npm install
-          npm run cargo-build -- --release
-
-      - name: Create package 'crud_jt'
-        working-directory: ./crud_jt-javascript
-        run: |
-          npm pack
-
       - name: Run Node.js test
         working-directory: ./crud_jt_tests/test-neon-package
         run: |
-          npm install ../../crud_jt-javascript/crud_jt-0.1.0.tgz
           npm install
           node test.js

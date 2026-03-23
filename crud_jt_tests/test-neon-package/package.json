@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "crud_jt": "file:../crud_jt-0.1.0.tgz"
+    "crudjt": "^1.0.0-beta.4"
   }
 }
