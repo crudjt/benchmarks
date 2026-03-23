@@ -1,8 +1,8 @@
 require Logger
 
-CRUD_JT.start(%CRUD_JT.Config{
-  encrypted_key: "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg=="
-})
+CRUDJT.Config.start_master(
+  secret_key: "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg=="
+)
 
 os = :os.type()
 
@@ -74,7 +74,7 @@ results =
     {time, list} =
       :timer.tc(fn ->
         Enum.reduce(1..requests, [], fn _, acc ->
-          [CRUD_JT.create(data) | acc]
+          [CRUDJT.create(data) | acc]
         end)
       end)
 
@@ -84,19 +84,19 @@ results =
 
     # READ
     IO.puts("when reads 40k tokens")
-    {time, _} = :timer.tc(fn -> Enum.each(list, &CRUD_JT.read/1) end)
+    {time, _} = :timer.tc(fn -> Enum.each(list, &CRUDJT.read/1) end)
     read_sec = to_sec.(time)
     IO.puts("#{read_sec} seconds")
 
     # UPDATE
     IO.puts("when updates 40k tokens")
-    {time, _} = :timer.tc(fn -> Enum.each(list, fn v -> CRUD_JT.update(v, updated_data) end) end)
+    {time, _} = :timer.tc(fn -> Enum.each(list, fn v -> CRUDJT.update(v, updated_data) end) end)
     update_sec = to_sec.(time)
     IO.puts("#{update_sec} seconds")
 
     # DELETE
     IO.puts("when deletes 40k tokens")
-    {time, _} = :timer.tc(fn -> Enum.each(list, &CRUD_JT.delete/1) end)
+    {time, _} = :timer.tc(fn -> Enum.each(list, &CRUDJT.delete/1) end)
     delete_sec = to_sec.(time)
     IO.puts("#{delete_sec} seconds")
 

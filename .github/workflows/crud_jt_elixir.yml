@@ -33,17 +33,6 @@ jobs:
           mix local.hex --force
           mix local.rebar --force
 
-      - name: Checkout crud_jt-elixir
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-elixir
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-elixir
-
-      - name: Install dependencies
-        working-directory: ./crud_jt-elixir
-        run: mix hex.build -o test_my_package --unpack
-
       - name: Run benchmarks
         working-directory: ./crud_jt_tests/crud_jt_performance_elixir
         run: |
