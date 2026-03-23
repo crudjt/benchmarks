@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import java.util.Collections;
 
-public class TestCRUD_JT {
+public class TestCRUDJT {
     public static final int COUNT_TO_RUN = 10;
     public static final int REQUESTS = 40_000;
     public static final int MAX_HASH_SIZE = 256;
@@ -35,9 +35,11 @@ public class TestCRUD_JT {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        CRUD_JT.Config
-            .encrypted_key("Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==")
-            .start();
+        CRUDJT.Config.startMaster(
+            Map.of(
+                "secret_key", "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg=="
+            )
+        );
 
         String os = System.getProperty("os.name").toLowerCase();
         String cpu = System.getProperty("os.arch");
@@ -81,7 +83,7 @@ public class TestCRUD_JT {
             start = System.nanoTime();
             String[] tokens = new String[REQUESTS];
             for (int j = 0; j < REQUESTS; j++) {
-                tokens[j] = CRUD_JT.create(data, -1, -1);
+                tokens[j] = CRUDJT.create(data, null, null);
             }
             end = System.nanoTime();
 
@@ -93,7 +95,7 @@ public class TestCRUD_JT {
             System.out.println("when reads 40k tokens");
             start = System.nanoTime();
             for (int j = 0; j < REQUESTS; j++) {
-                CRUD_JT.read(tokens[j]);
+                CRUDJT.read(tokens[j]);
             }
             end = System.nanoTime();
 
@@ -105,7 +107,7 @@ public class TestCRUD_JT {
             System.out.println("when updates 40k tokens");
             start = System.nanoTime();
             for (int j = 0; j < REQUESTS; j++) {
-                CRUD_JT.update(tokens[j], edData, -1, -1);
+                CRUDJT.update(tokens[j], edData, null, null);
             }
             end = System.nanoTime();
 
@@ -117,7 +119,7 @@ public class TestCRUD_JT {
             System.out.println("when deletes 40k tokens");
             start = System.nanoTime();
             for (int j = 0; j < REQUESTS; j++) {
-                CRUD_JT.delete(tokens[j]);
+                CRUDJT.delete(tokens[j]);
             }
             end = System.nanoTime();
 

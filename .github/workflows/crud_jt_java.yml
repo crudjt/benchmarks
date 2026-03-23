@@ -25,18 +25,6 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Checkout crud_jt-java
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-java
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-java
-
-      - name: Install crud_jt-java
-        working-directory: ./crud_jt-java
-        run: |
-          ./gradlew publishToMavenLocal
-
       - name: Run benchmarks
         working-directory: ./crud_jt_tests/crud_jt_performance_java_test
         run: ./gradlew run

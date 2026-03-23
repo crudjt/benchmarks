@@ -1,18 +1,21 @@
 plugins {
     id 'java'
-    id 'application'  // Додаємо плагін для запуску програми
+    id 'application'
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()  // Підключаємо локальний Maven репозиторій
+
+    maven {
+        url = "https://central.sonatype.com/repository/maven-snapshots/"
+    }
 }
 
 dependencies {
-    implementation 'com.github:crud_jt-java:1.0.0'
-    implementation 'org.msgpack:msgpack-core:0.9.0'
+  implementation 'com.crudjt:crudjt-java:1.0.0-SNAPSHOT'
+  implementation 'org.msgpack:msgpack-core:0.9.0'
 }
 
 application {
-    mainClass = 'TestCRUD_JT'  // Головний клас Java
+    mainClass = 'TestCRUDJT'
 }
