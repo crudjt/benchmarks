@@ -17,9 +17,11 @@ main(_) ->
     AddPath = fun(Path) -> code:add_patha(Path) end,
     lists:foreach(AddPath, filelib:wildcard("_build/default/lib/*/ebin")),
 
-    %% запускаємо бібліотеку
-    crud_jt:start(#{encrypted_key =>
-        <<"Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==">>}),
+    application:ensure_all_started(crudjt_erlang),
+
+    'Elixir.CRUDJT.Config':start_master([
+        {secret_key, <<"Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==">>}
+    ]),
 
     %% OS + version
     print_os(),
@@ -102,28 +104,28 @@ loop(N, Requests, Data, Updated, CT, RT, UT, DT) ->
 
     %% create
     {TimeC, List} = timer:tc(fun() ->
-        lists:foldl(fun(_, Acc) -> [crud_jt:create(Data) | Acc] end, [], lists:seq(1, Requests))
+        lists:foldl(fun(_, Acc) -> ['Elixir.CRUDJT':create(Data) | Acc] end, [], lists:seq(1, Requests))
     end),
     SecC = TimeC / 1000000,
     io:format("when creates 40k values: ~p~n", [SecC]),
 
     %% read
     {TimeR, _} = timer:tc(fun() ->
-        lists:foreach(fun(V) -> crud_jt:read(V) end, List)
+        lists:foreach(fun(V) -> 'Elixir.CRUDJT':read(V) end, List)
     end),
     SecR = TimeR / 1000000,
     io:format("when reads 40k values: ~p~n", [SecR]),
 
     %% update
     {TimeU, _} = timer:tc(fun() ->
-        lists:foreach(fun(V) -> crud_jt:update(V, Updated) end, List)
+        lists:foreach(fun(V) -> 'Elixir.CRUDJT':update(V, Updated) end, List)
     end),
     SecU = TimeU / 1000000,
     io:format("when updates 40k values: ~p~n", [SecU]),
 
     %% delete
     {TimeD, _} = timer:tc(fun() ->
-        lists:foreach(fun(V) -> crud_jt:delete(V) end, List)
+        lists:foreach(fun(V) -> 'Elixir.CRUDJT':delete(V) end, List)
     end),
     SecD = TimeD / 1000000,
     io:format("when deletes 40k values: ~p~n", [SecD]),
