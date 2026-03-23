@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "crudjt": "^1.0.0-beta.8"
+    "crudjt": "^1.0.0-beta.9"
   }
 }
