@@ -4,7 +4,7 @@
  {<<"cowlib">>,{pkg,<<"cowlib">>,<<"2.16.0">>},1},
  {<<"crudjt">>,{pkg,<<"crudjt">>,<<"1.0.0-beta.0">>},1},
  {<<"crudjt_erlang">>,
-  {git,"git@github.com:crudjt/crudjt_erlang.git",
+  {git,"https://github.com/crudjt/crudjt_erlang.git",
        {ref,"87095283b4ebaa79bc9ee095bfe659421fda6c9e"}},
   0},
  {<<"decimal">>,{pkg,<<"decimal">>,<<"1.9.0">>},2},
