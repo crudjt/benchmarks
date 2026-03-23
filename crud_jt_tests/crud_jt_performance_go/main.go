@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/vmihailenco/msgpack/v5"
-	"github.com/yourname/your_project"
+	"github.com/crudjt/crudjt-go"
 )
 
 const (
@@ -52,8 +52,8 @@ func median(vals []float64) float64 {
 }
 
 func main() {
-	crud_jt.Start(crud_jt.Config{
-		EncryptedKey: "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==",
+	crudjt.StartMaster(crudjt.ServerConfig	{
+	  SecretKey: "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg==",
 	})
 
 	fmt.Printf("OS: %s (%s)\n", runtime.GOOS, osVersion())
@@ -92,7 +92,7 @@ func main() {
 		tokens := make([]string, 0, REQUESTS)
 		start := time.Now()
 		for i := 0; i < REQUESTS; i++ {
-			v, _ := crud_jt.Create(&data, nil, nil)
+			v, _ := crudjt.Create(&data, nil, nil)
 			tokens = append(tokens, v)
 		}
 		elapsed := time.Since(start).Seconds()
@@ -103,7 +103,7 @@ func main() {
 		fmt.Println("when reads 40k tokens")
 		start = time.Now()
 		for i := 0; i < REQUESTS; i++ {
-			_, _ = crud_jt.Read(tokens[i])
+			_, _ = crudjt.Read(tokens[i])
 		}
 		elapsed = time.Since(start).Seconds()
 		readTimes = append(readTimes, elapsed)
@@ -113,7 +113,7 @@ func main() {
 		fmt.Println("when updates 40k tokens")
 		start = time.Now()
 		for i := 0; i < REQUESTS; i++ {
-			_, _ = crud_jt.Update(tokens[i], &updated, nil, nil)
+			_, _ = crudjt.Update(tokens[i], &updated, nil, nil)
 		}
 		elapsed = time.Since(start).Seconds()
 		updateTimes = append(updateTimes, elapsed)
@@ -123,7 +123,7 @@ func main() {
 		fmt.Println("when deletes 40k tokens")
 		start = time.Now()
 		for i := 0; i < REQUESTS; i++ {
-			_, _ = crud_jt.Delete(tokens[i])
+			_, _ = crudjt.Delete(tokens[i])
 		}
 		elapsed = time.Since(start).Seconds()
 		deleteTimes = append(deleteTimes, elapsed)

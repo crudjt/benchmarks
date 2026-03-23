@@ -26,13 +26,6 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Checkout crud_jt-go
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-go
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-go
-
       - name: Run benchmarks
         working-directory: ./crud_jt_tests/crud_jt_performance_go
         run: |
