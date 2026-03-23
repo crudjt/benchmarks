@@ -26,6 +26,5 @@ jobs:
       - name: Run Node.js test
         working-directory: ./crud_jt_tests/test-neon-package
         run: |
-          npm install crudjt
-          npm run build -- --release
+          npm install
           node test.js
