@@ -27,23 +27,8 @@ jobs:
           ruby-version: 3.4.4
           bundler-cache: true
 
-      - name: Install Bundler
-        run: |
-          gem install bundler
-
-      - name: Checkout crudjt-ruby
-        uses: actions/checkout@v4
-        with:
-          repository: Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1y/crudjt-ruby
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crudjt-ruby
-
       - name: Install crudjt-ruby
-        run: |
-          cd crudjt-ruby
-          bundle install
-          bundle exec rake build
-          gem install pkg/crudjt-1.0.0.beta.0.gem
+        run: gem install crudjt --pre
 
       - name: Run benchmarks
         run: ruby crud_jt_tests/crud_jt_performance_test.rb
