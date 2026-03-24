@@ -6,11 +6,11 @@ import subprocess
 import sys
 import msgpack
 
-from crud_jt import CRUD_JT
+import crudjt
 
-CRUD_JT.Config \
-    .encrypted_key('Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittlOHR2dciYiwmaYq98l3tG8h9yXVCxg==') \
-    .start()
+CRUDJT.Config.start_master(
+  secret_key='Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittlOHR2dciYiwmaYq98l3tG8h9yXVCxg=='
+)
 
 os_name = platform.system().lower()
 cpu = platform.machine()
@@ -66,7 +66,7 @@ for _ in range(COUNT_TO_RUN):
     print('when creates 40k tokens')
     start_time = time.time()
     for i in range(REQUESTS):
-        tokens.append(CRUD_JT.create(data))
+        tokens.append(CRUDJT.create(data))
     bench_on_create = round(time.time() - start_time, rounding)
     print(f"{bench_on_create}")
     bench_marks_on_create.append(bench_on_create)
@@ -74,7 +74,7 @@ for _ in range(COUNT_TO_RUN):
     print('when reads 40k tokens')
     start_time = time.time()
     for i in range(REQUESTS):
-        CRUD_JT.read(tokens[i])
+        CRUDJT.read(tokens[i])
     bench_on_read = round(time.time() - start_time, rounding)
     print(f"{bench_on_read}")
     bench_marks_on_read.append(bench_on_read)
@@ -82,7 +82,7 @@ for _ in range(COUNT_TO_RUN):
     print('when updates 40k tokens')
     start_time = time.time()
     for i in range(REQUESTS):
-        CRUD_JT.update(tokens[i], updated_data)
+        CRUDJT.update(tokens[i], updated_data)
     bench_on_update = round(time.time() - start_time, rounding)
     print(f"{bench_on_update}")
     bench_marks_on_update.append(bench_on_update)
@@ -90,7 +90,7 @@ for _ in range(COUNT_TO_RUN):
     print('when deletes 40k tokens')
     start_time = time.time()
     for i in range(REQUESTS):
-        CRUD_JT.delete(tokens[i])
+        CRUDJT.delete(tokens[i])
     bench_on_delete = round(time.time() - start_time, rounding)
     print(f"{bench_on_delete}")
     bench_marks_on_delete.append(bench_on_delete)

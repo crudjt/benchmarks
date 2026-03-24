@@ -25,19 +25,8 @@ jobs:
         with:
           python-version: '3.13.7'
 
-      - name: Checkout crud_jt-python
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-python
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-python
-
       - name: Install crud_jt-python
-        run: |
-          cd crud_jt-python
-          python -m pip install --upgrade pip
-          pip3 install .
+        run: pip install crudjt
 
       - name: Run benchmarks
-        run: |
-          python3 crud_jt_tests/crud_jt_performance_test.py
+        run: python3 crud_jt_tests/crud_jt_performance_test.py
