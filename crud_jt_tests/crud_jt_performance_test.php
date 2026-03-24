@@ -1,13 +1,12 @@
 <?php
 
-require __DIR__ . '/../crud_jt-php/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-use CRUD_JT\CRUD_JT;
-use CRUD_JT\Config;
+use CRUDJT\CRUDJT;
 
-Config::encrypted_key(
-    "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg=="
-)->start();
+\CRUDJT\Config::startMaster([
+  'secret_key' => "Cm7B68NWsMNNYjzMDREacmpe5sI1o0g40ZC9w1yQW3WOes7Gm59UsittLOHR2dciYiwmaYq98l3tG8h9yXVCxg=="
+]);
 
 $os = PHP_OS_FAMILY;
 $cpu = php_uname('m');
@@ -60,7 +59,7 @@ for ($round = 0; $round < COUNT_TO_RUN; $round++) {
     echo "when creates 40k tokens" . PHP_EOL;
     $start = microtime(true);
     for ($i = 0; $i < REQUESTS; $i++) {
-        $tokens[] = CRUD_JT::create($data);
+        $tokens[] = CRUDJT::create($data);
     }
     $elapsed = round(microtime(true) - $start, 3);
     $benchCreate[] = $elapsed;
@@ -70,7 +69,7 @@ for ($round = 0; $round < COUNT_TO_RUN; $round++) {
     echo "when reads 40k tokens" . PHP_EOL;
     $start = microtime(true);
     for ($i = 0; $i < REQUESTS; $i++) {
-        CRUD_JT::read($tokens[$i]);
+        CRUDJT::read($tokens[$i]);
     }
     $elapsed = round(microtime(true) - $start, 3);
     $benchRead[] = $elapsed;
@@ -80,7 +79,7 @@ for ($round = 0; $round < COUNT_TO_RUN; $round++) {
     echo "when updates 40k tokens" . PHP_EOL;
     $start = microtime(true);
     for ($i = 0; $i < REQUESTS; $i++) {
-        CRUD_JT::update($tokens[$i], $updated);
+        CRUDJT::update($tokens[$i], $updated);
     }
     $elapsed = round(microtime(true) - $start, 3);
     $benchUpdate[] = $elapsed;
@@ -90,7 +89,7 @@ for ($round = 0; $round < COUNT_TO_RUN; $round++) {
     echo "when deletes 40k tokens" . PHP_EOL;
     $start = microtime(true);
     for ($i = 0; $i < REQUESTS; $i++) {
-        CRUD_JT::delete($tokens[$i]);
+        CRUDJT::delete($tokens[$i]);
     }
     $elapsed = round(microtime(true) - $start, 3);
     $benchDelete[] = $elapsed;

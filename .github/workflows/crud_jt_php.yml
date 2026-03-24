@@ -26,16 +26,7 @@ jobs:
           extensions: mbstring, json, ffi, msgpack
           tools: composer
 
-      - name: Checkout crud_jt-php
-        uses: actions/checkout@v4
-        with:
-          repository: exwarvlad/crud_jt-php
-          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: crud_jt-php
-
-      - name: Run Composer
-        working-directory: ./crud_jt-php
-        run: composer install
-
       - name: Run benchmarks
-        run: php crud_jt_tests/crud_jt_performance_test.php
+        run: |
+          composer require crudjt/crudjt-php:^1.0@beta
+          php crud_jt_tests/crud_jt_performance_test.php
