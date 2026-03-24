@@ -46,7 +46,7 @@ for _ in range(COUNT_TO_RUN):
     tokens = []
 
     print("\nChecking scale load...")
-    print("when creates 40k tokens with Turbo Queue")
+    print("when creates 40k tokens")
 
     # --- створення ---
     def create_tokens():

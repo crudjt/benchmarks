@@ -41,7 +41,7 @@ COUNT_TO_RUN.times do
 
   p 'Checking scale load...'
 
-  p 'when creates 40k tokens with Turbo Queue'
+  p 'when creates 40k tokens'
   bench_on_create =  Benchmark.measure { REQUESTS.times { |i| tokens << JWT.encode(data, hmac_secret, 'HS256') } }
   bench_marks_on_create << bench_on_create.to_a.last.round(3)
   puts bench_on_create
