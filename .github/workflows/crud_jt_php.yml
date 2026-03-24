@@ -26,7 +26,8 @@ jobs:
           extensions: mbstring, json, ffi, msgpack
           tools: composer
 
-      - name: Run benchmarks
+      - name: Run Composer and Benchmarks
+        working-directory: ./crud_jt_tests
         run: |
           composer require crudjt/crudjt-php:^1.0@beta
-          php crud_jt_tests/crud_jt_performance_test.php
+          php crud_jt_performance_test.php
