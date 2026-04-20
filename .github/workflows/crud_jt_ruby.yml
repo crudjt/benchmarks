@@ -25,10 +25,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.4.4
-          bundler-cache: true
 
       - name: Install crudjt-ruby
-        run: gem install crudjt --pre
+        run: gem install crudjt
 
       - name: Run benchmarks
         run: ruby crud_jt_tests/crud_jt_performance_test.rb
