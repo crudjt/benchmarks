@@ -17,6 +17,8 @@ import java.util.Objects;
 
 import java.util.Collections;
 
+import com.crudjt.CRUDJT;
+
 public class TestCRUDJT {
     public static final int COUNT_TO_RUN = 10;
     public static final int REQUESTS = 40_000;
