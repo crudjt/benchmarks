@@ -1,5 +1,7 @@
 github.com/crudjt/crudjt-go v1.0.0-beta.2 h1:z6SyIdRMwcbeVCREuZpAj7p0eKqkr/xwRiye3bPm/FQ=
 github.com/crudjt/crudjt-go v1.0.0-beta.2/go.mod h1:gbx7W8iYmLzNqAsLY1THP7PgAnyA10FOS+aARAFh87A=
+github.com/crudjt/crudjt-go v1.0.0 h1:SbjEUXDJwGAIBS3ddqILiByHm0rn6BLMuG4GtT+hB5M=
+github.com/crudjt/crudjt-go v1.0.0/go.mod h1:gbx7W8iYmLzNqAsLY1THP7PgAnyA10FOS+aARAFh87A=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/hashicorp/golang-lru/v2 v2.0.7 h1:a+bsQ5rvGLjzHuww6tVxozPZFVghXaHOwFs4luLUK2k=
