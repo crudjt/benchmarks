@@ -29,5 +29,5 @@ jobs:
       - name: Run Composer and Benchmarks
         working-directory: ./crud_jt_tests
         run: |
-          composer require crudjt/crudjt-php:^1.0@beta
+          composer require crudjt/crudjt-php
           php crud_jt_performance_test.php
