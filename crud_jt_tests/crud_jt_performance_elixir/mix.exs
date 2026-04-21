@@ -20,7 +20,7 @@ defmodule TestCrudJtPackage.MixProject do
 
   def deps do
     [
-      {:crudjt, "~> 1.0.0-beta.0"}
+      {:crudjt, "~> 1.0.0"}
     ]
   end
 end
